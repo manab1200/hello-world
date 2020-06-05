@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-    - image: docker:18.06.0-ce-git
+    - image: docker:18.09.6-ce-git
     steps:
     - checkout
     - run: git version
