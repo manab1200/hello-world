@@ -22,7 +22,7 @@ workflows:
   version: 2
   build_step:
     jobs:
-      - build:
-          filters:
-            branches:
-              only: /^[0-9]+\.[0-9]+(\.[0-9]+)?|abc12-.*/
+      build
+        #  filters:
+        #    branches:
+        #      only: /^[0-9]+\.[0-9]+(\.[0-9]+)?|abc12-.*/
