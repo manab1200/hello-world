@@ -6,7 +6,7 @@ jobs:
     steps:
     - checkout
     - setup_remote_docker:
-        version: docker:18.06.0-ce
+        version: 18.06.0-ce
     - run: 
         name: check git version
         command: git version
@@ -18,11 +18,11 @@ jobs:
         command: apk add no-cache jq
 
 
-workflows:
-  version: 2
-  build_step:
-    jobs:
-      build
-        #  filters:
-        #    branches:
-        #      only: /^[0-9]+\.[0-9]+(\.[0-9]+)?|abc12-.*/
+# workflows:
+#  version: 2
+#  build_step:
+#    jobs:
+#      build:
+#          filters:
+#            branches:
+#              only: /^[0-9]+\.[0-9]+(\.[0-9]+)?|abc12-.*/
