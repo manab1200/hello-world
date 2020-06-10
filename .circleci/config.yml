@@ -2,27 +2,40 @@ version: 2.0
 jobs:
   build:
     docker:
-    - image: docker:18.06.0-ce-git
+      - image: docker:18.06.0-ce-git
     steps:
-    - checkout
-    - setup_remote_docker:
-        version: 18.06.0-ce
-    - run: 
-        name: check git version
-        command: git version
-    - run: 
-        name: install make
-        command: apk add --no-cache make
-    - run: 
-        name: install jq
-        command: apk add --no-cache jq
-
+      - checkout
+      - setup_remote_docker:
+          version: 18.06.0-ce
+      - run:
+          name: check git version
+          command: git version
+      - run:
+          name: install make
+          command: apk add --no-cache make
+      - run:
+          name: install jq
+          command: apk add --no-cache jq
+  deploy:
+    docker:
+      - image: docker:18.06.0-ce-git
+    steps:
+      - checkout
+      - run:
+          name: echo something
+          command: echo "deploy workflow"
 
 workflows:
   version: 2
   build_step:
     jobs:
       build:
-          filters:
-            branches:
-              only: /^[0-9]+\.[0-9]+(\.[0-9]+)?|abc12-.*/
+        filters:
+          branches:
+            only: /^[0-9]+\.[0-9]+(\.[0-9]+)?|abc12-.*/
+      deploy:
+        reqires:
+          - build
+        filters:
+          branches:
+            only: /^[0-9]+\.[0-9]+(\.[0-9]+)?|abc12-.*/
